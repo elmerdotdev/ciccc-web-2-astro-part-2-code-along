@@ -1,0 +1,37 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Header from "../components/Header.astro";
+const title = 'Users'
+---
+
+<BaseLayout title={title}>
+  <Header activeItem="users" />
+  <h1>{title}</h1>
+  <ul class="users"></ul>
+</BaseLayout>
+
+<script>
+  // Client-side rendering
+  const ul = document.querySelector('.users')
+
+  async function getUsers() {
+    const res = await fetch(`https://dummyjson.com/users`)
+    const data = await res.json()
+    return data.users
+  }
+
+  async function buildList() {
+    const users = await getUsers()
+    let html = ''
+
+    users.forEach(user => {
+      html += `
+        <h5>${user.firstName} ${user.lastName}</h5>
+      `
+    })
+
+    ul.innerHTML = html
+  }
+
+  buildList()
+</script>

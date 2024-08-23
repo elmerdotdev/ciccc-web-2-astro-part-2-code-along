@@ -1,0 +1,10 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro"
+import Header from "../components/Header.astro"
+const title = "Home"
+---
+
+<BaseLayout title={title}>
+	<Header activeItem="home" />
+	<h1>{title}</h1>
+</BaseLayout>

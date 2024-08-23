@@ -1,0 +1,39 @@
+---
+import { getCollection } from "astro:content";
+
+const projects = await getCollection('projects')
+---
+
+<section>
+  {
+    projects.map(project => (
+      <div class="project-item">
+        <h3>{project.data.title}</h3>
+        <div>
+          <img src={`/images/${project.data.thumbnail}`} />
+        </div>
+        <div>{project.data.description}</div>
+        <div><a href={project.data.respository} target="_blank">View Repository</a></div>
+        <div>{project.data.language}</div>
+      </div>
+    ))
+  }
+</section>
+
+<style>
+  section {
+    display: flex;
+    gap: 1rem;
+  }
+
+  .project-item {
+    flex: 1;
+    padding: .5rem;
+    background-color: #ddd;
+  }
+
+  img {
+    max-width: 100px;
+    width: auto;
+  }
+</style>

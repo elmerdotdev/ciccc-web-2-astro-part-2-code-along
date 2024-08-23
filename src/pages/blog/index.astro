@@ -1,0 +1,48 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro"
+import Header from "../../components/Header.astro"
+import { getCollection } from "astro:content";
+
+// Fetch blog collection
+const posts = await getCollection('blog')
+
+// Sorting posts by date in descending order
+posts.sort((a, b) => {
+  const dateA = new Date(a.data.date)
+  const dateB = new Date(b.data.date)
+
+  return dateB.getTime() - dateA.getTime()
+})
+
+const title = "Blog"
+---
+
+<BaseLayout title={title}>
+  <Header activeItem="blog" />
+  <h1>{title}</h1>
+
+  <div class="articles">
+    {
+      posts.map(post => (
+        <article>
+          <div>
+            <h3>{post.data.title}</h3>
+            <span>{post.data.date}</span>
+          </div>
+          <em>{post.data.author}</em>
+          <a href={`/blog/${post.data.slug}`}>Read More...</a>
+        </article>
+      ))
+    }
+  </div>
+</BaseLayout>
+
+<style>
+  h3 {
+    margin-bottom: 0;
+  }
+</style>
+
+<script>
+  gsap.from('article', { x: '-100vw', duration: 1, stagger: .5 })
+</script>

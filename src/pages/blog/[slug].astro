@@ -1,0 +1,39 @@
+---
+import BlogLayout from '../../layouts/BlogLayout.astro'
+import { getCollection, getEntry } from "astro:content"
+
+export async function getStaticPaths() {
+  // Fetch blog collection
+  const posts = await getCollection('blog')
+
+  // Return array with blog post slug
+  return posts.map(post => ({
+    params: { slug: post.slug }
+  }))
+};
+
+// Fetch slug parameter from url
+const { slug } = Astro.params
+
+// Fetch post from blog collection based on slug
+const post = await getEntry('blog', slug)
+
+if (!post) {
+  throw new Error('Post does not exist')
+}
+
+// Render post markdown raw content into html
+const { Content } = await post.render()
+---
+
+<BlogLayout title={post.data.title}>
+  <div>{post.data.date}</div>
+  <strong>{post.data.author}</strong>
+  <div>
+    <Content />
+  </div>
+  
+  <div>
+    <a href="/blog">Back to Blog</a>
+  </div>
+</BlogLayout>

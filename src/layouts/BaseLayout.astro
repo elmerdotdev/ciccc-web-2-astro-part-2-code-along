@@ -1,0 +1,32 @@
+---
+import Projects from '../components/Projects.astro'
+import Footer from '../components/Footer.astro'
+const { title } = Astro.props
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{title}</title>
+  <script is:inline src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
+</head>
+<body>
+  <div class="container">
+    <main>
+      <slot /> <!-- THIS IS WHERE YOUR BASELAYOUT CONTENT WILL GO -->
+    </main>
+    <Projects />
+    <Footer />
+  </div>
+</body>
+</html>
+
+<style>
+  .container {
+    max-width: 700px;
+    width: 100%;
+    margin: auto;
+  }
+</style>

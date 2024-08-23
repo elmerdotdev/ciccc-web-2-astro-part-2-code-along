@@ -1,0 +1,18 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro"
+import Header from "../components/Header.astro"
+const title = "Contact Us"
+---
+
+<BaseLayout title={title}>
+  <Header activeItem="contact" />
+  <h1>{title}</h1>
+  <button class="contact-btn">Get in touch!</button>
+</BaseLayout>
+
+<script>
+  const btn = document.querySelector('.contact-btn')
+  btn.addEventListener('click', function() {
+    alert('hey')
+  })
+</script>

@@ -1,0 +1,31 @@
+---
+import Header from "../components/Header.astro"
+import Footer from '../components/Footer.astro'
+const { title } = Astro.props
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{title}</title>
+</head>
+<body>
+  <div class="container">
+    <Header />
+    <main>
+      <slot />
+    </main>
+    <Footer />
+  </div>
+</body>
+</html>
+
+<style>
+  .container {
+    max-width: 700px;
+    width: 100%;
+    margin: auto;
+  }
+</style>
